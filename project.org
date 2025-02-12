@@ -18,17 +18,19 @@ npm install --save-dev nodemon eslint prettier @prettier/plugin-pug
     "format": "prettier --write '**/*.pug' --plugin=@prettier/plugin-pug"
 #+end_src
 ** TODOs
-*** TODO Database Tables
-**** TODO User
+*** DONE Database Tables
+**** DONE User
 *User to Files (One-to-many)* A User can have many Files directly associated with them.
 *User to Folders (One-to-many)* A User can have many Folders.
-**** TODO Folder
+**** DONE Folder
 *Folder to Files (One-to-many)* A Folder can contain many Files.
 *Folder to User (Many-to-one)* A Folder belongs to one User.
-**** TODO Files
+**** DONE Files
 *File to User (Many-to-one)* A File belongs to one User.
 *File to Folder (Many-to-one, Optional)* A File can belong to one Folder or directly to a User.
-
-
-
-
+*** TODO User Authentication
+**** TODO Model
+TODO: User CRUD
+**** TODO Controller
+**** TODO Views
+**** TODO Router
