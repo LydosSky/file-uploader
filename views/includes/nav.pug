@@ -1,0 +1,16 @@
+nav.fixed-top.navbar.bg-dark.border-bottom.border-body(data-bs-theme='dark')
+  .container
+    .navbar-nav
+      .d-flex.gap-3.justify-content-center.align-items-center
+        a.navbar-brand.nav-link(href='/') File Uploader
+        if currentUser
+    .navbar-nav
+      if currentUser
+        .d-flex.gap-3.justify-content-center.align-items-center
+          .navbar-text
+            if currentUser
+              span #{ currentUser.username }
+          form.display-inline(method='POST', action='/auth/log-out')
+            button.nav-link(type=submit) Log Out
+      else
+        a.nav-link(href='/auth/log-in') Log In
