@@ -2,4 +2,7 @@ doctype html
 html
   include includes/head.pug
   body
-    block content
+    header
+      include includes/nav.pug
+    .d-flex.justify-content-center.align-items-center.vh-100
+      block content
