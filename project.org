@@ -30,7 +30,6 @@ npm install --save-dev nodemon eslint prettier @prettier/plugin-pug
 *File to Folder (Many-to-one, Optional)* A File can belong to one Folder or directly to a User.
 *** TODO User Authentication
 **** TODO Model
-TODO: User CRUD
 **** TODO Controller
 **** TODO Views
 **** TODO Router
