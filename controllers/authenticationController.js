@@ -1,18 +1,20 @@
-exports.getUserSignUP = function (req, res) {
-  res.send('USER get sign-up');
-};
-exports.getUserLogIn = function (req, res) {
+const asyncHandler = require('express-async-handler');
+
+exports.getUserSignUP = asyncHandler(function (req, res) {
+  res.render('sign-up', { title: 'Signup' });
+});
+exports.getUserLogIn = asyncHandler(function (req, res) {
   res.send('USER get log-in');
-};
-exports.getUserLogOut = function (req, res) {
+});
+exports.getUserLogOut = asyncHandler(function (req, res) {
   res.send('USER get log-out');
-};
-exports.postUserSignUp = function (req, res) {
+});
+exports.postUserSignUp = asyncHandler(function (req, res) {
   res.send('USER post sign-up');
-};
-exports.postUserLogIn = function (req, res) {
+});
+exports.postUserLogIn = asyncHandler(function (req, res) {
   res.send('USER post log-in');
-};
-exports.postUserLogOut = function (req, res) {
+});
+exports.postUserLogOut = asyncHandler(function (req, res) {
   res.send('USER post log-out');
-};
+});
