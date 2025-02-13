@@ -27,6 +27,17 @@ app.get('/', function (req, res) {
 
 app.use('/auth', authenticationRouter);
 
+// 404 handler
+app.use(function (req, res, next) {
+  res.status(404).render('error', { title: '404' });
+});
+
+// Error handling middleware
+app.use(function (err, req, res, next) {
+  console.log(err);
+  res.status(err.status || 500).render('error', { title: '500' });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
   console.log(`Express app listenning on port ${PORT}!`);
