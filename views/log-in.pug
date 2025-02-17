@@ -1,0 +1,51 @@
+extends layout.pug
+block content
+  - const createReducer = (name) => (prev, curr) => (curr.path === name ? 'is-invalid' : '');
+  #custom-form-width.card
+    h3.p-3.text-center.m-0 Log In
+    form.p-3.needs-validation(method='POST', action='/auth/log-in', novalidate)
+      .mb-3
+        input#username.form-control(
+          type='text',
+          placeholder='User Name',
+          name='username',
+          required
+        )
+        .invalid-feedback Username is required
+      .mb-3
+        input#password.form-control(
+          type='password',
+          placeholder='Password',
+          name='password',
+          aria-describedby='password-feedback',
+          required
+        )
+        #password-feedback.invalid-feedback Password must contain at least 8 character, one lowercase letter, one uppercase letter, one number, and one special character
+      .mb-3
+        button.btn.btn-dark.w-100(type=submit) Log In
+
+  #server-errors.d-none(data-errors=JSON.stringify(errors))
+  script(defer).
+    // Directly taken from bootstrap documentation
+    // https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles
+    (() => {
+      'use strict';
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation');
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach((form) => {
+        form.addEventListener(
+          'submit',
+          (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          },
+          false,
+        );
+      });
+    })();
