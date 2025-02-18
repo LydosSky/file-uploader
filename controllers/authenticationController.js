@@ -1,4 +1,7 @@
 const asyncHandler = require('express-async-handler');
+const user = require('../models/User');
+const { validationResult } = require('express-validator');
+const bcryptjs = require('bcryptjs');
 
 exports.getUserSignUP = asyncHandler(function (req, res) {
   res.render('sign-up', { title: 'SignUp' });
@@ -24,7 +27,9 @@ exports.postUserSignUp = asyncHandler(function (req, res) {
 });
 
 exports.postUserLogIn = asyncHandler(function (req, res) {
-  res.send('USER post log-in');
+  const errors = validationResult(body).isEmpty();
+  if (!errors.isEmpty())
+    res.render('log-in', { title: 'LogIn', errors: errors.array() });
 });
 
 exports.postUserLogOut = asyncHandler(function (req, res) {

@@ -23,7 +23,8 @@ block content
         #password-feedback.invalid-feedback Password must contain at least 8 character, one lowercase letter, one uppercase letter, one number, and one special character
       .mb-3
         button.btn.btn-dark.w-100(type=submit) Log In
-
+      .my-3.text-center
+        p <a class="link-underline link-underline-opacity-0" href="/auth/sign-up">Sign Up </a>
   #server-errors.d-none(data-errors=JSON.stringify(errors))
   script(defer).
     // Directly taken from bootstrap documentation
