@@ -12,7 +12,6 @@ exports.getUserLogIn = asyncHandler(function (req, res) {
 });
 
 exports.postUserSignUp = asyncHandler(function (req, res) {
-  res.send('USER post sign-up');
   const errors = validationResult(req);
   if (!errors.isEmpty())
     res.render('sign-up', { title: 'SignUp', errors: errors.array() });
@@ -32,6 +31,9 @@ exports.postUserLogIn = asyncHandler(function (req, res) {
     res.render('log-in', { title: 'LogIn', errors: errors.array() });
 });
 
-exports.postUserLogOut = asyncHandler(function (req, res) {
-  res.send('USER post log-out');
+exports.postUserLogOut = asyncHandler(function (req, res, next) {
+  req.logOut((err) => {
+    if (err) return next(err);
+    return res.redirect('/');
+  });
 });
