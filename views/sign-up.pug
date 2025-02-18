@@ -5,7 +5,7 @@ block content
     h3.p-3.text-center.m-0 Sign Up
     form.p-3.needs-validation(
       method='POST',
-      action='/authentication/sign-up',
+      action='/auth/sign-up',
       novalidate
     )
       .mb-3
@@ -69,4 +69,16 @@ block content
           false,
         );
       });
+    })();
+    (function () {
+      const errorsJson = document.getElementById('server-errors').dataset.errors;
+      const errors = JSON.parse(errorsJson);
+      if (errors.length > 0) {
+        errors.forEach((error) => {
+          const input = document.getElementById(error.path);
+          if (input) {
+            input.classList.add('is-invalid');
+          }
+        });
+      }
     })();
