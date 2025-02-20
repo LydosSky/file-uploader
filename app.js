@@ -10,6 +10,8 @@ const { PrismaClient } = require('@prisma/client');
 
 const user = require('./models/User');
 const authenticationRouter = require('./routes/authenticationRouter');
+const storageRouter = require('./routes/storageRouter');
+
 const app = express();
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,8 +40,8 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
+
 app.get('/', function (req, res) {
-  console.log(res.locals.currentUser);
   res.render('index', { title: 'Home', user: res.locals.currentUser });
 });
 
@@ -48,6 +50,7 @@ app.get('/users', function (req, res) {
 });
 
 app.use('/auth', authenticationRouter);
+app.use('/storage', storageRouter);
 
 // 404 handler
 app.use(function (req, res, next) {
