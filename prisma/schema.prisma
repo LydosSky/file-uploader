@@ -19,16 +19,25 @@ model User {
   email         String   @unique
   password_hash String
   createdAt     DateTime @default(now())
-  UpdatedAt     DateTime @updatedAt
-  files         File[]
-  folders       Folder[]
+  updatedAt     DateTime @updatedAt
+  storage       Storage?
+}
+
+model Storage {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  User      User     @relation(fields: [userId], references: [id])
+  files     File[]
+  folders   Folder[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Folder {
   id        Int      @id @default(autoincrement())
   name      String
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  storageId Int
+  storage   Storage  @relation(fields: [storageId], references: [id])
   files     File[]
   createdAt DateTime @default(now())
   UpdatedAt DateTime @updatedAt
@@ -38,8 +47,8 @@ model File {
   id        Int      @id @default(autoincrement())
   name      String
   path      String
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  storageId Int
+  storage   Storage  @relation(fields: [storageId], references: [id])
   folderId  Int?
   Folder    Folder?  @relation(fields: [folderId], references: [id])
   createdAt DateTime @default(now())
