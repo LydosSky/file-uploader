@@ -12,18 +12,24 @@ const prisma = new PrismaClient();
  *   @property {string} password_hash
  * }
  * */
-exports.createUser = (user) => prisma.user.create({ data: user });
+exports.createUser = (user) =>
+  prisma.user.create({
+    data: { ...user, storage: { create: {} } },
+    include: { storage: true },
+  });
+
 /**
  * @param {number} id
  * */
-exports.getUserById = (id) => prisma.user.findUnique({ where: { id } });
+exports.getUserById = (id) =>
+  prisma.user.findUnique({ where: { id }, include: { storage: true } });
 /**
  * @param {string} username
  * */
 exports.getUserByUsername = (username) =>
   prisma.user.findUnique({ where: { username } });
 
-exports.getUsers = () => prisma.user.findMany();
+exports.getUsers = () => prisma.user.findMany({ include: { storage: true } });
 /**
  * @param {number} id
  * */
