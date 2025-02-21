@@ -16,7 +16,7 @@ router.post(
   '/log-in',
   loginValidator,
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/storage',
     failureRedirect: '/auth/log-in',
   }),
   authenticationController.postUserLogIn,
