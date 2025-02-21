@@ -1,0 +1,7 @@
+extends layout
+block content
+  form(method='POST', action='/file-create')
+    .mb-3
+      input#formFile.form-control(type='file')
+    .mb-3
+      button.btn.btn-dark.w-100(type=submit) Add File

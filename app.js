@@ -8,9 +8,9 @@ dotenv.config();
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const { PrismaClient } = require('@prisma/client');
 
-const user = require('./models/User');
 const authenticationRouter = require('./routes/authenticationRouter');
 const storageRouter = require('./routes/storageRouter');
+const fileRouter = require('./routes/fileRouter');
 
 const app = express();
 app.set('view engine', 'pug');
@@ -45,12 +45,9 @@ app.get('/', function (req, res) {
   res.render('index', { title: 'Home', user: res.locals.currentUser });
 });
 
-app.get('/users', function (req, res) {
-  user.getUsers().then((users) => res.send(users));
-});
-
 app.use('/auth', authenticationRouter);
 app.use('/storage', storageRouter);
+app.use('/file', fileRouter);
 
 // 404 handler
 app.use(function (req, res, next) {
