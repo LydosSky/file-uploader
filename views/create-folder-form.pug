@@ -1,0 +1,18 @@
+extends layout
+block content
+  #custom-form-width.card.px-4
+    h3.p-3.text-center.m-0 Create Folder
+
+    form.p-3.needs-validation(
+      method='POST',
+      action='/folder/create',
+      novalidate
+    )
+      .input-group.mb-3
+        input#name.form-control(
+          type='text',
+          placeholder='Folder Name',
+          name='name',
+          required
+        )
+        button#button-addon.btn.btn-dark(type='submit') Create

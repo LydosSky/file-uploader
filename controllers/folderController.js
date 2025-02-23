@@ -1,8 +1,13 @@
 const expressAsyncHandler = require('express-async-handler');
 const folder = require('../models/Folder');
 
-exports.createFolder = expressAsyncHandler((req, res) =>
-  res.send('Create Folder'),
+exports.getCreateFolder = expressAsyncHandler((req, res) =>
+  res.render('create-folder-form', { title: 'Create Folder' }),
+);
+exports.postCreateFolder = expressAsyncHandler((req, res) =>
+  folder
+    .createFolder({ name: req.body.name, storageId: req.user.storage.id })
+    .then(res.redirect('/storage')),
 );
 exports.getFolders = expressAsyncHandler((req, res) => res.send('Get Folders'));
 exports.getFolderById = expressAsyncHandler((req, res) =>
