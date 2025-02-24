@@ -48,6 +48,7 @@ app.get('/', function (req, res) {
 app.use('/auth', authenticationRouter);
 app.use('/storage', storageRouter);
 app.use('/file', fileRouter);
+app.use('/folder', folderRouter);
 
 // 404 handler
 app.use(function (req, res, next) {
