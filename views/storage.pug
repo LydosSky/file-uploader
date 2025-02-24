@@ -1,4 +1,22 @@
 extends layout
 block content
-  div
-    a.link(href='/file') Add File
+  .mt-5
+    h2.d-flex.gap-4 Folders
+      a.link.text-decoration-none(href='/folder/create') Create Folder
+    ul
+      each folder in storage.folders
+        li= folder.name
+          a.btn.btn-link.text-decoration-none(
+            href='folder/update/' + folder.id
+          ) Update
+          form.d-inline(action='folder/delete/' + folder.id, method='POST')
+            button.btn.btn-link.text-decoration-none(type='submit') Delete
+          if folder.files
+            ul
+              each file in folder.files
+                li= file.name
+    h2.d-flex.gap-4 Files
+      a.link.text-decoration-none(href='/file/add') Add File
+    ul
+      each files in storage.files
+        li= files.name
