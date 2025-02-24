@@ -7,5 +7,8 @@ exports.createFolder = (folder) =>
 exports.getFolders = () => prisma.folder.findMany();
 exports.getFolderById = (id) => prisma.folder.findUnique({ where: { id } });
 exports.updateFolder = (folder) =>
-  prisma.folder.update({ where: { id: folder.id }, data: { ...folder } });
+  prisma.folder.update({
+    where: { id: folder.id },
+    data: { name: folder.name },
+  });
 exports.deleteFolder = (id) => prisma.folder.delete({ where: { id } });

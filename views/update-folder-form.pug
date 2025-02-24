@@ -1,0 +1,19 @@
+extends layout
+block content
+  #custom-form-width.card.px-4
+    h3.p-3.text-center.m-0 Update Folder
+
+    form.p-3.needs-validation(
+      method='POST',
+      action='/folder/update/' + folder.id,
+      novalidate
+    )
+      .input-group.mb-3
+        input#name.form-control(
+          type='text',
+          placeholder='Folder Name',
+          name='name',
+          value=folder.name,
+          required
+        )
+        button#button-addon.btn.btn-dark(type='submit') Update
