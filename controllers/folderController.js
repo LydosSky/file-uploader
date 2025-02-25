@@ -1,6 +1,5 @@
 const expressAsyncHandler = require('express-async-handler');
 const folder = require('../models/Folder');
-const { response } = require('express');
 
 exports.getFolders = expressAsyncHandler((req, res) =>
   folder.getFolders().then((response) => res.send(response)),

@@ -14,13 +14,13 @@ block content
               type='submit',
               value='Delete'
             )
+          a.btn.btn-sm.btn-link.text-decoration-none(
+            href='/file/add/' + folder.id
+          ) Add File
           if folder.files
             ul
               each file in folder.files
                 li= file.name
-          a.btn.btn-sm.btn-link.text-decoration-none(
-            href='/file/add/' + folder.id
-          ) Add File
     h2.d-flex.gap-4 Files
       a.link.text-decoration-none(href='/file/add') Add File
     ul
