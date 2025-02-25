@@ -6,15 +6,21 @@ block content
     ul
       each folder in storage.folders
         li= folder.name
-          a.btn.btn-link.text-decoration-none(
-            href='folder/update/' + folder.id
+          a.btn-link.btn.btn-sm.text-decoration-none(
+            href='/folder/update/' + folder.id
           ) Update
-          form.d-inline(action='folder/delete/' + folder.id, method='POST')
-            button.btn.btn-link.text-decoration-none(type='submit') Delete
+          form.d-inline(action='/folder/delete/' + folder.id, method='POST')
+            input.btn.btn-link.btn-sm.small.text-decoration-none(
+              type='submit',
+              value='Delete'
+            )
           if folder.files
             ul
               each file in folder.files
                 li= file.name
+          a.btn.btn-sm.btn-link.text-decoration-none(
+            href='/file/add/' + folder.id
+          ) Add File
     h2.d-flex.gap-4 Files
       a.link.text-decoration-none(href='/file/add') Add File
     ul
