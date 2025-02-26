@@ -27,6 +27,15 @@ exports.getFileAddToFolder = asyncHandler((req, res) =>
     folderId: req.params.folderId,
   }),
 );
+
+exports.getFileById = asyncHandler((req, res) =>
+  file
+    .getFileById(parseInt(req.params.id))
+    .then((file) =>
+      res.render('file-details', { title: 'File Details', file }),
+    ),
+);
+
 exports.postFileAddToFolder = asyncHandler((req, res) =>
   file
     .createFile({
