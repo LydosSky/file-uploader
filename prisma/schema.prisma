@@ -51,7 +51,7 @@ model File {
   storageId Int
   storage   Storage  @relation(fields: [storageId], references: [id])
   folderId  Int?
-  Folder    Folder?  @relation(fields: [folderId], references: [id])
+  folder    Folder?  @relation(fields: [folderId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
