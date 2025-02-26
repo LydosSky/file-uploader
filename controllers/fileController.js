@@ -42,3 +42,7 @@ exports.postFileAddToFolder = asyncHandler((req, res) =>
     })
     .then((responsee) => res.redirect('/storage')),
 );
+
+exports.postFileDelete = asyncHandler((req, res) =>
+  file.deleteFile(parseInt(req.params.id)).then(() => res.redirect('/storage')),
+);

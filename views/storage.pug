@@ -1,8 +1,9 @@
 extends layout
 block content
   .mt-5
-    h2.d-flex.gap-4 Folders
-      a.link.text-decoration-none(href='/folder/create') Create Folder
+    p.d-flex.gap-4.align-items-center
+      span.fs-1 Folders
+      a.fs-6.link.text-decoration-none(href='/folder/create') Create Folder
     ul
       each folder in storage.folders
         li= folder.name
@@ -17,12 +18,31 @@ block content
           a.btn.btn-sm.btn-link.text-decoration-none(
             href='/file/add/' + folder.id
           ) Add File
-          if folder.files
-            ul
-              each file in folder.files
-                li= file.name
-    h2.d-flex.gap-4 Files
-      a.link.text-decoration-none(href='/file/add') Add File
+          ul
+            if folder.files
+            each file in folder.files
+              li= file.name
+                form.d-inline(action='/file/delete/' + file.id, method='POST')
+                  input.btn.btn-link.btn-sm.small.text-decoration-none(
+                    type='submit',
+                    value='Delete'
+                  )
+                  a.btn.btn-sm.btn-link.text-decoration-none(
+                    href='/file/details/' + file.id
+                  ) Details
+
+    p.d-flex.gap-4.align-items-center
+      span.fs-1 Files
+      a.fs-6.link.text-decoration-none(href='/file/add') Add File
     ul
-      each files in storage.files
-        li= files.name
+      each file in storage.files
+        unless file.folderId
+          li= file.name
+            form.d-inline(action='/file/delete/' + file.id, method='POST')
+              input.btn.btn-link.btn-sm.small.text-decoration-none(
+                type='submit',
+                value='Delete'
+              )
+              a.btn.btn-sm.btn-link.text-decoration-none(
+                href='/file/details/' + file.id
+              ) Details
