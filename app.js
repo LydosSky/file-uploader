@@ -11,8 +11,11 @@ const { PrismaClient } = require('@prisma/client');
 const authenticationRouter = require('./routes/authenticationRouter');
 const storageRouter = require('./routes/storageRouter');
 const fileRouter = require('./routes/fileRouter');
+const folderRouter = require('./routes/folderRouter');
+const routeGuard = require('./middlewares/routeGuard');
 
 const app = express();
+
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
@@ -46,9 +49,9 @@ app.get('/', function (req, res) {
 });
 
 app.use('/auth', authenticationRouter);
-app.use('/storage', storageRouter);
-app.use('/file', fileRouter);
-app.use('/folder', folderRouter);
+app.use('/storage', routeGuard, storageRouter);
+app.use('/file', routeGuard, fileRouter);
+app.use('/folder', routeGuard, folderRouter);
 
 // 404 handler
 app.use(function (req, res, next) {
