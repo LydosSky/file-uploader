@@ -3,7 +3,7 @@ block content
   .mt-5
     p.d-flex.gap-4.align-items-center.justify-content-between
       span.fs-1 Folders
-      a.fs-6.link.text-decoration-none(href='/folder/create') Create Folder
+      a.fs-6.link(href='/folder/create') Create Folder
     ul
       each folder in storage.folders
         li.list-group-item.my-4
@@ -46,10 +46,12 @@ block content
                       type='submit',
                       value='Delete'
                     )
+            else
+              li.list-group-item.text-center.my-2 Folder is empty
 
-    p.d-flex.gap-4.align-items-center
+    p.d-flex.gap-4.align-items-center.justify-content-between
       span.fs-1 Files
-      a.fs-6.link.text-decoration-none(href='/file/add') Add File
+      a.fs-6.link(href='/file/add') Add File
     ul
       each file in storage.files
         unless file.folderId
