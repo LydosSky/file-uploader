@@ -13,6 +13,7 @@ router.post(
   upload.single('file'),
   fileController.postFileAddToFolder,
 );
+router.post('/download/:id', fileController.postFileDownload);
 router.post('/delete/:id', fileController.postFileDelete);
 
 module.exports = router;

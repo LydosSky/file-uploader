@@ -29,11 +29,12 @@ exports.getFileAddToFolder = asyncHandler((req, res) =>
 );
 
 exports.getFileById = asyncHandler((req, res) =>
-  file
-    .getFileById(parseInt(req.params.id))
-    .then((file) =>
-      res.render('file-details', { title: 'File Details', file }),
-    ),
+  file.getFileById(parseInt(req.params.id)).then((file) =>
+    res.render('file-details', {
+      title: 'File Details',
+      file: { ...file, createdAt: file.createdAt.toUTCString() },
+    }),
+  ),
 );
 
 exports.postFileAddToFolder = asyncHandler((req, res) =>
@@ -54,4 +55,11 @@ exports.postFileAddToFolder = asyncHandler((req, res) =>
 
 exports.postFileDelete = asyncHandler((req, res) =>
   file.deleteFile(parseInt(req.params.id)).then(() => res.redirect('/storage')),
+);
+
+exports.postFileDownload = asyncHandler((req, res) =>
+  file.getFileById(parseInt(req.params.id)).then((file) => {
+    res.setHeader('Content-Disposition', `attachment; filename="${file.name}"`);
+    return res.sendFile(file.path);
+  }),
 );

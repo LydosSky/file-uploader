@@ -1,17 +1,27 @@
 extends layout
 block content
-  each key in Object.keys(file)
-    if key === "folder"
-      p.d-flex.gap-2
-        span.fw-bold Folder Name:
-        span #{ file[key].name }
-    if key === "details"
-      each detail in Object.keys(file[key])
+  .my-4.text-center
+    form(method='POST', action='/file/download/' + file.id)
+      button.btn.btn-lg.btn-primary(type='submit') DOWNLOAD FILE
+  .card.p-4
+    h2.card-title.text-center File Details
+    each key in Object.keys(file)
+      if key === "folder"
         p.d-flex.gap-2
-          span.fw-bold File #{ detail }:
-          span #{ file[key][detail] }
-    - const notDetailsOrFolder = key !== 'folder' && key !== 'details';
-    if notDetailsOrFolder
-      p.d-flex.gap-2
-        span.fw-bold File #{ key }:
-        span #{ file[key] }
+          span.fw-bold Folder Name:
+          span #{ file[key].name }
+      if key === "details"
+        each detail in Object.keys(file[key])
+          p.d-flex.gap-2
+            span.fw-bold File #{ detail }:
+            span #{ file[key][detail] }
+          if detail === 'createdAt'
+            p.d-flex.gap-2
+              span.fw-bold File #{ detail }:
+              span #{ file[key][detail] }
+
+      - const notDetailsOrFolder = key !== 'folder' && key !== 'details';
+      if notDetailsOrFolder
+        p.d-flex.gap-2
+          span.fw-bold File #{ key }:
+          span #{ file[key] }
