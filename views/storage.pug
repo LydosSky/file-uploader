@@ -1,35 +1,51 @@
 extends layout
 block content
   .mt-5
-    p.d-flex.gap-4.align-items-center
+    p.d-flex.gap-4.align-items-center.justify-content-between
       span.fs-1 Folders
       a.fs-6.link.text-decoration-none(href='/folder/create') Create Folder
     ul
       each folder in storage.folders
-        li= folder.name
-          a.btn-link.btn.btn-sm.text-decoration-none(
-            href='/folder/update/' + folder.id
-          ) Update
-          form.d-inline(action='/folder/delete/' + folder.id, method='POST')
-            input.btn.btn-link.btn-sm.small.text-decoration-none(
-              type='submit',
-              value='Delete'
-            )
-          a.btn.btn-sm.btn-link.text-decoration-none(
-            href='/file/add/' + folder.id
-          ) Add File
+        li.list-group-item.my-4
+          .d-flex.align-items-center.justify-content-between.border-bottom
+            .d-flex.gap-1
+              i.bi.bi-folder
+              span.fw-bold #{ folder.name }
+            .d-flex.gap-4
+              a.text-success.btn.btn-sm.btn-link.text-decoration-none(
+                href='/file/add/' + folder.id
+              ) Add File
+              a.text-warning.btn-link.btn.btn-sm.text-decoration-none(
+                href='/folder/update/' + folder.id
+              ) Update
+              form.d-inline(
+                action='/folder/delete/' + folder.id,
+                method='POST'
+              )
+                input.text-danger.btn.btn-link.btn-sm.small.text-decoration-none(
+                  type='submit',
+                  value='Delete'
+                )
+
           ul
             if folder.files
             each file in folder.files
-              li= file.name
-                form.d-inline(action='/file/delete/' + file.id, method='POST')
-                  input.btn.btn-link.btn-sm.small.text-decoration-none(
-                    type='submit',
-                    value='Delete'
-                  )
-                  a.btn.btn-sm.btn-link.text-decoration-none(
+              li.d-flex.align-items-center.justify-content-between
+                .d-flex.gap-1
+                  i.bi.bi-file-earmark
+                  span #{ file.name }
+                span.d-flex.gap-4
+                  a.text-info.btn.btn-sm.btn-link.text-decoration-none(
                     href='/file/details/' + file.id
                   ) Details
+                  form.d-inline(
+                    action='/file/delete/' + file.id,
+                    method='POST'
+                  )
+                    input.text-danger.btn.btn-link.btn-sm.small.text-decoration-none(
+                      type='submit',
+                      value='Delete'
+                    )
 
     p.d-flex.gap-4.align-items-center
       span.fs-1 Files
@@ -37,12 +53,16 @@ block content
     ul
       each file in storage.files
         unless file.folderId
-          li= file.name
-            form.d-inline(action='/file/delete/' + file.id, method='POST')
-              input.btn.btn-link.btn-sm.small.text-decoration-none(
-                type='submit',
-                value='Delete'
-              )
-              a.btn.btn-sm.btn-link.text-decoration-none(
+          li.d-flex.align-items-center.justify-content-between
+            .d-flex.gap-1
+              i.bi.bi-file-earmark
+              span #{ file.name }
+            span.d-flex.gap-4
+              a.text-info.btn.btn-sm.btn-link.text-decoration-none(
                 href='/file/details/' + file.id
               ) Details
+              form.d-inline(action='/file/delete/' + file.id, method='POST')
+                input.text-danger.btn.btn-link.btn-sm.small.text-decoration-none(
+                  type='submit',
+                  value='Delete'
+                )
