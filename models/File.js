@@ -5,7 +5,10 @@ const prisma = new PrismaClient();
 exports.createFile = (file) => prisma.file.create({ data: file });
 exports.getFiles = () => prisma.file.findMany();
 exports.getFileById = (id) =>
-  prisma.file.findFirst({
+  prisma.file.findUnique({
+    omit: {
+      updatedAt: true,
+    },
     where: { id },
     include: {
       folder: true,
