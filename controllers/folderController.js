@@ -16,7 +16,7 @@ exports.getCreateFolder = expressAsyncHandler((req, res) =>
 exports.postCreateFolder = expressAsyncHandler((req, res) =>
   folder
     .createFolder({ name: req.body.name, storageId: req.user.storage.id })
-    .then(res.redirect('/storage')),
+    .then(() => res.redirect('/storage')),
 );
 
 exports.getUpdateFolder = expressAsyncHandler((req, res) =>
